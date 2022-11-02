@@ -17,7 +17,7 @@ function App() {
         <div className='main-wrapper'>
           <div className='main-body'>
             <Switch>
-            <Route path='/mainPage' component={dashboard} />
+            <Route path='/mainPage' component={dashboard2} />
             <Route path='/approval' component={approval} />
             <Route path='/dashboard2' component={dashboard2} />
             <Route path='/viewOrder/:id' component={viewOrder} />

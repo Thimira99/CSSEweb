@@ -42,9 +42,9 @@ export const sidebarData = [
         icon: <FaUserCircle />,
         link: "/dashboard"
     },
-    {
-        title: "Dashboard",
-        icon: <FaUserCircle />,
-        link: "/dashboard2"
-    },
+    // {
+    //     title: "Dashboard",
+    //     icon: <FaUserCircle />,
+    //     link: "/dashboard2"
+    // },
 ]
