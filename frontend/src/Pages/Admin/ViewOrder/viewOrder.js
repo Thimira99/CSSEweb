@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Navbar from '../../../components/AdminSideBar/HomeNavBar';
-import { Form, Button, Table, Row, Col, Container } from "react-bootstrap";
+import { Form, Button, Table, Row, Col } from "react-bootstrap";
 import AccountCSS from './account.module.css';
-import { FcOpenedFolder } from "react-icons/fc";
-import { MDBDataTable } from 'mdbreact';
+
 import axios from 'axios';
 import Select from 'react-select';
 import Swal from 'sweetalert2';
@@ -23,7 +22,8 @@ class viewOrder extends Component {
             statusdata: '',
             options: [],
             selectedOptions: [],
-            suppliers: []
+            suppliers: [],
+            sendStatus:true
         }
 
         this.onApprove = this.onApprove.bind(this);
@@ -41,8 +41,8 @@ class viewOrder extends Component {
         }
 
         axios.post(url,data).then((res) => {
-            console.log("sssss",res.status)
-            if(res.status == '200'){
+         
+            if(res.status === '200'){
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -53,6 +53,7 @@ class viewOrder extends Component {
 
                 this.setState({
                     selectedOptions: [],
+                    sendStatus:false
                 })
             }
         })
@@ -60,7 +61,7 @@ class viewOrder extends Component {
     }
 
     changeSupplier = (selectedOptions) => {
-        console.log(selectedOptions)
+       
         this.setState({
             selectedOptions,
 
@@ -76,20 +77,14 @@ class viewOrder extends Component {
         const url = `http://localhost:8000/api/order/getOrderById/${this.state.orderId}`;
 
         axios.get(url).then((res) => {
-            console.log(res.data)
+           
             if (res.data.code === '200') {
+                const value = res.data.supplier.status === 'Approved' ? false : true
                 this.setState({
                     Orders: res.data.supplier,
                     Items: res.data.supplier.item,
-                    statusdata: res.data.supplier.status
-                }, () => {
-                    console.log("resss", this.state.statusdata)
-                    console.log("Items", this.state.Items)
-                    console.log("statusdata", this.state.statusdata)
-
-
-
-
+                    statusdata: res.data.supplier.status,
+                    sendStatus:value
                 })
             }
         })
@@ -105,10 +100,6 @@ class viewOrder extends Component {
         return data
     }
 
-    componentDidMount() {
-        this.getAllOrders();
-    }
-
 
     onApprove(e) {
 
@@ -122,7 +113,7 @@ class viewOrder extends Component {
             "status": statusdata
         }
         axios.put(url, data).then((res) => {
-            console.log("ressss", res)
+           
         })
 
 
@@ -140,7 +131,7 @@ class viewOrder extends Component {
             "status": statusdata
         }
         axios.put(url, data).then((res) => {
-            console.log("ressss", res)
+           
         })
 
 
@@ -156,7 +147,7 @@ class viewOrder extends Component {
             "role": "supplier"
         }
         axios.post(url, data).then((res) => [
-            console.log("sup", res.data.data),
+         
             this.setState({
                 suppliers: res.data.data
             }, () => {
@@ -230,7 +221,7 @@ class viewOrder extends Component {
                       <Col>
                             <Button style={{ "width": "110px", "fontWeight": "600", "marginBottom": "20px", "marginTop": "20px" }} onClick={this.onApprove}>Approve<span style={{ "fontSize": "22px", "marginLeft": "8px" }}></span></Button>
                             <Button style={{ "width": "110px", "fontWeight": "600", "marginBottom": "20px", "marginTop": "20px", "marginLeft": "30px" }} onClick={this.onDecline}>Decline<span style={{ "fontSize": "22px", "marginLeft": "8px" }}></span></Button>
-                          { this.state.statusdata != 'Approved' &&  <> <Form.Group className="mb-4" controlId="formBasicEmail">
+                          { this.state.sendStatus  &&  <> <Form.Group className="mb-4" controlId="formBasicEmail">
                              
                              <Form.Label><span style={{ "fontFamily": "sans-serif", "fontWeight": "500", "fontSize": "18px" }}>Select Supplier</span></Form.Label>
                              <div style={{"width":"550px"}}>
@@ -290,7 +281,7 @@ class viewOrder extends Component {
                                             <tr key={index}>
                                                 <td style={{ 'width': '20px', "font-size": "16px", "fontWeight": "400" }}>{index + 1}</td>
                                                 <td style={{ 'width': '740px', "font-size": "16px", "fontWeight": "400" }}>{item.material}</td>
-                                                <td style={{ 'width': '210px', "font-size": "16px", "fontWeight": "400" }}>{"Rs." + item.quatity}</td>
+                                                <td style={{ 'width': '210px', "font-size": "16px", "fontWeight": "400" }}>{item.quatity}</td>
 
 
 
