@@ -7,7 +7,7 @@ import { MDBDataTable } from 'mdbreact';
 import axios from 'axios';
 
 
-class dashboard2 extends Component {a
+class dashboard2 extends Component {
 
 
     constructor(props) {
