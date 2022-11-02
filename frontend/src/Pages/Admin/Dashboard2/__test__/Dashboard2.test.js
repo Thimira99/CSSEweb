@@ -1,6 +1,6 @@
 import React from 'react'; 
 import ReactDOM from 'react-dom';
-import dashboard2 from './../Dashboard2';
+import Dashboard2 from './../Dashboard2';
 import { BrowserRouter } from 'react-router-dom';
 
 import { render, cleanup } from '@testing-library/react';
@@ -14,13 +14,13 @@ it("renders without crashing", () => {
     const div = document.createElement("div");
     ReactDOM.render(
     <BrowserRouter>
-     <dashboard2></dashboard2>
+     <Dashboard2></Dashboard2>
      </BrowserRouter>, div)
 })
 
 it("renders Cards correctly", () => {
-    const {getByTestId} = render(<BrowserRouter><dashboard2><div></div></dashboard2></BrowserRouter>)
-    expect(getByTestId('cards')).toHaveTextContent("")
+    const {getByTestId} = render(<BrowserRouter><Dashboard2><div><span>"Hi Administrator.. "</span></div></Dashboard2></BrowserRouter>)
+    expect(getByTestId('cards')).toHaveTextContent("Hi Administrator.. ")
 })
 
 // it("renders Cards correctly", () => {
@@ -30,7 +30,7 @@ it("renders Cards correctly", () => {
 
 //This will convert this to like a virtual DOM object
 it("matches snapshot", () =>{
-    const tree= renderer.create(<BrowserRouter><dashboard2><div> </div></dashboard2></BrowserRouter>).toJSON();
+    const tree= renderer.create(<BrowserRouter><Dashboard2><div>"Display Hi Administrator.. "</div></Dashboard2></BrowserRouter>).toJSON();
     expect(tree).toMatchSnapshot(); 
     //It looks for folder called snapshot
 } )
