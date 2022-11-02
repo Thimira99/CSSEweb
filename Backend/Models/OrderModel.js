@@ -29,7 +29,7 @@ const orderSchema = new mongoose.Schema({
 	companyName: {
 		type: String,
 	},
-});
+},{timestamps:true});
 
 const Order = mongoose.model('orders', orderSchema);
 module.exports = Order;
