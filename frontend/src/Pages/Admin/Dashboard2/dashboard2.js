@@ -7,7 +7,7 @@ import { MDBDataTable } from 'mdbreact';
 import axios from 'axios';
 
 
-class dashboard2 extends Component {
+class dashboard2 extends Component {a
 
 
     constructor(props) {
@@ -124,7 +124,7 @@ class dashboard2 extends Component {
 
                 <Row>
 
-                    <div className={AccountCSS.container}>
+                    <div data-testid="cards" className={AccountCSS.container}>
 
                         <span style={{ "fontSize": "x-large" }}>Hi Administrator.. </span><span style={{ "fontSize": "10px" }}> you have </span><span style={{ "fontSize": "12px" }}>1 new message</span>
                     </div>
