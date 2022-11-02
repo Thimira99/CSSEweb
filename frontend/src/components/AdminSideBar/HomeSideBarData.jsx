@@ -15,7 +15,7 @@ export const sidebarData = [
     {
         title: "Approval",
         icon: <FaUserPlus />,
-        link: "/approvel"
+        link: "/approval"
     },
     {
         title: "Total Orders",
@@ -41,5 +41,10 @@ export const sidebarData = [
         title: "Settings",
         icon: <FaUserCircle />,
         link: "/dashboard"
+    },
+    {
+        title: "Dashboard",
+        icon: <FaUserCircle />,
+        link: "/dashboard2"
     },
 ]
