@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from '../../../components/AdminSideBar/HomeNavBar';
-import { Form, Button, Table, Row, Col, Container } from "react-bootstrap";
+import {  Row, Col } from "react-bootstrap";
 import AccountCSS from './account.module.css';
 import { FcOpenedFolder } from "react-icons/fc";
 import { MDBDataTable } from 'mdbreact';
@@ -30,12 +30,12 @@ class dashboard2 extends Component {a
         const url = 'http://localhost:8000/api/order/getallAccountDetails';
 
         axios.get(url).then((res) => {
-            console.log(res.data)
+        
             if (res.data.code === '200') {
                 this.setState({
                     allOrders: res.data.data
                 }, () => {
-                    console.log("resss", this.state.allOrders)
+                  
 
                     const userAttributes = []
                     this.state.allOrders.forEach(order => {
@@ -44,7 +44,7 @@ class dashboard2 extends Component {a
                         let todate = String(date.getDate());
                         let month = String(date.getMonth()+1);
                         let year = String(date.getFullYear());
-                        console.log(todate)
+                       
                         userAttributes.push({
                             Invoice: order.orderId,
                             Date: todate+"/"+month+"/"+year,
